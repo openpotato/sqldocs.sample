@@ -1,0 +1,2212 @@
+{
+  "Name": "Sakila Sample Firebird Schema",
+  "Version": "10",
+  "Description": "Sakila Sample Database Schema for Firebird",
+  "DbmsName": "Firebird",
+  "DbmsVersion": "4.0",
+  "Tables": [
+    {
+      "Name": "ACTOR",
+      "Description": "This table lists information for all actors. The table is joined to the @table:FILM table by means of the @table:FILM_ACTOR table.",
+      "Columns": [
+        {
+          "Name": "ACTOR_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each actor in the table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "FIRST_NAME",
+          "DataType": "VARCHAR(45)",
+          "Description": "The actor first name.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_NAME",
+          "DataType": "VARCHAR(45)",
+          "Description": "The actor last name.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "ACTOR",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "ACTOR_ID"
+          }
+        ]
+      },
+      "Indices": [
+        {
+          "Name": "ACTOR_IDX_LAST_NAME",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "LAST_NAME"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY1",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ACTOR_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "ADDRESS",
+      "Description": "This table contains address information for customers, staff, and stores. The table primary key appears as a foreign key in the @table:CUSTOMER, @table:STAFF, and @table:STORE tables.",
+      "Columns": [
+        {
+          "Name": "ADDRESS_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each address in the table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "ADDRESS",
+          "DataType": "VARCHAR(50)",
+          "Description": "The first line of an address.",
+          "IsNullable": false
+        },
+        {
+          "Name": "ADDRESS2",
+          "DataType": "VARCHAR(50)",
+          "Description": "An optional second line of an address.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "DISTRICT",
+          "DataType": "VARCHAR(20)",
+          "Description": "The region of an address, this may be a state, province, prefecture, etc.",
+          "IsNullable": false
+        },
+        {
+          "Name": "CITY_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key pointing to the @table:CITY table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "POSTAL_CODE",
+          "DataType": "VARCHAR(10)",
+          "Description": "The postal code or ZIP code of the address (where applicable).",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "PHONE",
+          "DataType": "VARCHAR(20)",
+          "Description": "The telephone number for the address.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "ADDRESS",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "ADDRESS_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_ADDRESS_CITY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CITY_ID"
+            }
+          ],
+          "ForeignTableName": "CITY",
+          "ForeignTableColumns": [
+            {
+              "Name": "CITY_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_ADDRESS_CITY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CITY_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_ADDRESS_FK_CITY_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CITY_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY2",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "CATEGORY",
+      "Description": "This table lists the categories that can be assigned to a film. The table is joined to the @table:FILM table by means of the @table:FILM_CATEGORY table.",
+      "Columns": [
+        {
+          "Name": "CATEGORY_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each category in the table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "NAME",
+          "DataType": "VARCHAR(25)",
+          "Description": "The name of the category.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "CATEGORY",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "CATEGORY_ID"
+          }
+        ]
+      },
+      "Indices": [
+        {
+          "Name": "RDB$PRIMARY3",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CATEGORY_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "CITY",
+      "Description": "This table contains a list of cities. The table is referred to by a foreign key in the @table:ADDRESS table and refers to the @table:COUNTRY table using a foreign key.",
+      "Columns": [
+        {
+          "Name": "CITY_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each city in the table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "CITY",
+          "DataType": "VARCHAR(50)",
+          "Description": "The name of the city.",
+          "IsNullable": false
+        },
+        {
+          "Name": "COUNTRY_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the country that the city belongs to.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "CITY",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "CITY_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_CITY_COUNTRY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "COUNTRY_ID"
+            }
+          ],
+          "ForeignTableName": "COUNTRY",
+          "ForeignTableColumns": [
+            {
+              "Name": "COUNTRY_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_CITY_COUNTRY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "COUNTRY_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_CITY_FK_COUNTRY_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "COUNTRY_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY4",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CITY_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "COUNTRY",
+      "Description": "This table contains a list of countries. The table is referred to by a foreign key in the @table:CITY table.",
+      "Columns": [
+        {
+          "Name": "COUNTRY_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each country in the table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "COUNTRY",
+          "DataType": "VARCHAR(50)",
+          "Description": "The name of the country.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "COUNTRY",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "COUNTRY_ID"
+          }
+        ]
+      },
+      "Indices": [
+        {
+          "Name": "RDB$PRIMARY5",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "COUNTRY_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "CUSTOMER",
+      "Description": "This table contains a list of all customers. The table is referred to in the @table:PAYMENT and @table:RENTAL tables and refers to the @table:ADDRESS and @table:STORE tables using foreign keys.",
+      "Columns": [
+        {
+          "Name": "CUSTOMER_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each customer in the table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "STORE_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the customer <i>home store</i>. Customers are not limited to renting only from this store, but this is the store at which they generally shop.",
+          "IsNullable": false
+        },
+        {
+          "Name": "FIRST_NAME",
+          "DataType": "VARCHAR(45)",
+          "Description": "The customer first name.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_NAME",
+          "DataType": "VARCHAR(45)",
+          "Description": "The customer last name.",
+          "IsNullable": false
+        },
+        {
+          "Name": "EMAIL",
+          "DataType": "VARCHAR(50)",
+          "Description": "The customer email address.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "ADDRESS_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the customer address in the @table:ADDRESS table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "ACTIVE",
+          "DataType": "BOOLEAN",
+          "Description": "Indicates whether the customer is an active customer. Setting this to <code>FALSE</code> serves as an alternative to deleting a customer outright. Most queries should have a <code>WHERE ACTIVE = TRUE</code> clause.",
+          "IsNullable": false,
+          "Default": "DEFAULT TRUE"
+        },
+        {
+          "Name": "CREATE_DATE",
+          "DataType": "TIMESTAMP",
+          "Description": "The date the customer was added to the system. This date is automatically set using a trigger during an INSERT.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "CUSTOMER",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "CUSTOMER_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_CUSTOMER_ADDRESS",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "ForeignTableName": "ADDRESS",
+          "ForeignTableColumns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_CUSTOMER_STORE",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "ForeignTableName": "STORE",
+          "ForeignTableColumns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_CUSTOMER_ADDRESS",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_CUSTOMER_STORE",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_CUSTOMER_FK_ADDRESS_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_CUSTOMER_FK_STORE_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_CUSTOMER_LAST_NAME",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "LAST_NAME"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY6",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "FILM",
+      "Description": "This table is a list of all films potentially in stock in the stores. The actual in-stock copies of each film are represented in the inventory table. The table refers to the @table:LANGUAGE table and is referred to by the @table:FILM_CATEGORY, @table:FILM_ACTOR, and @table:INVENTORY tables.",
+      "Columns": [
+        {
+          "Name": "FILM_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each film in the table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "TITLE",
+          "DataType": "VARCHAR(255)",
+          "Description": "The title of the film.",
+          "IsNullable": false
+        },
+        {
+          "Name": "DESCRIPTION",
+          "DataType": "BLOB subtype text",
+          "Description": "A short description or plot summary of the film.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "RELEASE_YEAR",
+          "DataType": "INTEGER",
+          "Description": "The year in which the movie was released.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "LANGUAGE_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key pointing at the @table:LANGUAGE table; identifies the language of the film.",
+          "IsNullable": false
+        },
+        {
+          "Name": "ORIGINAL_LANGUAGE_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key pointing at the @table:LANGUAGE table; identifies the original language of the film. Used when a film has been dubbed into a new language.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "RENTAL_DURATION",
+          "DataType": "SMALLINT",
+          "Description": "The length of the rental period, in days.",
+          "IsNullable": false,
+          "Default": "DEFAULT 3"
+        },
+        {
+          "Name": "RENTAL_RATE",
+          "DataType": "DECIMAL",
+          "Description": "The cost to rent the film for the period specified in the <code>RENTAL_DURATION</code> column.",
+          "IsNullable": false,
+          "Default": "DEFAULT 4.99"
+        },
+        {
+          "Name": "LENGTH",
+          "DataType": "SMALLINT",
+          "Description": "The duration of the film, in minutes.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "REPLACEMENT_COST",
+          "DataType": "DECIMAL",
+          "Description": "The amount charged to the customer if the film is not returned or is returned in a damaged state.",
+          "IsNullable": false,
+          "Default": "DEFAULT 19.99"
+        },
+        {
+          "Name": "RATING",
+          "DataType": "VARCHAR(5)",
+          "Description": "The rating assigned to the film. Can be one of: <code>G</code>, <code>PG</code>, <code>PG-13</code>, <code>R</code>, or <code>NC-17</code>.",
+          "IsNullable": true,
+          "Default": "DEFAULT 'G'",
+          "ValidValues": [
+            {
+              "Value": "G",
+              "Description": "General audiences – All ages admitted."
+            },
+            {
+              "Value": "PG",
+              "Description": "Parental guidance suggested – Some material may not be suitable for children."
+            },
+            {
+              "Value": "PG-13",
+              "Description": "Parents strongly cautioned – Some material may be inappropriate for children under 13."
+            },
+            {
+              "Value": "R",
+              "Description": "Restricted – Under 17 requires accompanying parent or adult guardian."
+            },
+            {
+              "Value": "NC-17",
+              "Description": "No children under 17 admitted."
+            }
+          ]
+        },
+        {
+          "Name": "SPECIAL_FEATURES",
+          "DataType": "VARCHAR(100)",
+          "Description": "Lists which common special features are included on the DVD. Can be zero or more of: <code>Trailers</code>, <code>Commentaries</code>, <code>Deleted Scenes</code>, <code>Behind the Scenes</code>.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "FILM",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "FILM_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_FILM_LANGUAGE",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "LANGUAGE_ID"
+            }
+          ],
+          "ForeignTableName": "LANGUAGE",
+          "ForeignTableColumns": [
+            {
+              "Name": "LANGUAGE_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_FILM_LANGUAGE_ORIGINAL",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ORIGINAL_LANGUAGE_ID"
+            }
+          ],
+          "ForeignTableName": "LANGUAGE",
+          "ForeignTableColumns": [
+            {
+              "Name": "LANGUAGE_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_FILM_LANGUAGE",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "LANGUAGE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_FILM_LANGUAGE_ORIGINAL",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ORIGINAL_LANGUAGE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_FILM_FK_LANGUAGE_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "LANGUAGE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_FILM_FK_ORIGINAL_LANGUAGE_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ORIGINAL_LANGUAGE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY7",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "FILM_ACTOR",
+      "Description": "This table is used to support a many-to-many relationship between films and actors. For each actor in a given film, there will be one row in the @table:FILM_ACTOR table listing the actor and film. The table refers to the @table:FILM and @table:ACTOR tables using foreign keys.",
+      "Columns": [
+        {
+          "Name": "ACTOR_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the actor.",
+          "IsNullable": false
+        },
+        {
+          "Name": "FILM_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the film.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "FILM_ACTOR",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "ACTOR_ID"
+          },
+          {
+            "Name": "FILM_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_FILM_ACTOR_ACTOR",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ACTOR_ID"
+            }
+          ],
+          "ForeignTableName": "ACTOR",
+          "ForeignTableColumns": [
+            {
+              "Name": "ACTOR_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_FILM_ACTOR_FILM",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "ForeignTableName": "FILM",
+          "ForeignTableColumns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FILM_ACTOR_IDX_FK_ACTOR",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ACTOR_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FILM_ACTOR_IDX_FK_FILM",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_FILM_ACTOR_ACTOR",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ACTOR_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_FILM_ACTOR_FILM",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY8",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ACTOR_ID"
+            },
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "FILM_CATEGORY",
+      "Description": "This table is used to support a many-to-many relationship between films and categories. For each category applied to a film, there will be one row in the @table:FILM_CATEGORY table listing the category and film. The table refers to the @table:FILM and @table:CATEGORY tables using foreign keys.",
+      "Columns": [
+        {
+          "Name": "FILM_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the film.",
+          "IsNullable": false
+        },
+        {
+          "Name": "CATEGORY_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the category.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "FILM_CATEGORY",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "FILM_ID"
+          },
+          {
+            "Name": "CATEGORY_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_FILM_CATEGORY_CATEGORY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CATEGORY_ID"
+            }
+          ],
+          "ForeignTableName": "CATEGORY",
+          "ForeignTableColumns": [
+            {
+              "Name": "CATEGORY_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_FILM_CATEGORY_FILM",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "ForeignTableName": "FILM",
+          "ForeignTableColumns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FILM_CATEGORY_IDX_FK_CATEGORY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CATEGORY_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FILM_CATEGORY_IDX_FK_FILM",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_FILM_CATEGORY_CATEGORY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CATEGORY_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_FILM_CATEGORY_FILM",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY9",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            },
+            {
+              "Name": "CATEGORY_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "FILM_TEXT",
+      "Description": "This table contains the <code>FILM_ID</code>, <code>TITLE</code> and <code>DESCRIPTION</code> columns of the @table:FILM table, with the contents of the table kept in synchrony with the @table:FILM table by means of triggers on @table:film table <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations.",
+      "Columns": [
+        {
+          "Name": "FILM_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each film in the table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "TITLE",
+          "DataType": "VARCHAR(255)",
+          "Description": "The title of the film.",
+          "IsNullable": false
+        },
+        {
+          "Name": "DESCRIPTION",
+          "DataType": "BLOB subtype text",
+          "Description": "A short description or plot summary of the film.",
+          "IsNullable": true
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "FILM_TEXT",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "FILM_ID"
+          }
+        ]
+      },
+      "Indices": [
+        {
+          "Name": "RDB$PRIMARY10",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "INVENTORY",
+      "Description": "This table contains one row for each copy of a given film in a given store. The table refers to the @table:FILM and @table:STORE tables using foreign keys and is referred to by the @table:RENTAL table.",
+      "Columns": [
+        {
+          "Name": "INVENTORY_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each item in inventory.",
+          "IsNullable": false
+        },
+        {
+          "Name": "FILM_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key pointing to the film this item represents.",
+          "IsNullable": false
+        },
+        {
+          "Name": "STORE_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key pointing to the store stocking this item.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "INVENTORY",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "INVENTORY_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_INVENTORY_FILM",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "ForeignTableName": "FILM",
+          "ForeignTableColumns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_INVENTORY_STORE",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "ForeignTableName": "STORE",
+          "ForeignTableColumns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_INVENTORY_FILM",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_INVENTORY_STORE",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_INVENTORY_FK_FILM_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_INVENTORY_FK_FILM_ID_STORE_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            },
+            {
+              "Name": "FILM_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY11",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "INVENTORY_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "LANGUAGE",
+      "Description": "This table is a lookup table listing the possible languages that films can have for their language and original language values. The table is referred to by the @table:FILM table.",
+      "Columns": [
+        {
+          "Name": "LANGUAGE_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each language.",
+          "IsNullable": false
+        },
+        {
+          "Name": "NAME",
+          "DataType": "CHAR(20)",
+          "Description": "The English name of the language.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "LANGUAGE",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "LANGUAGE_ID"
+          }
+        ]
+      },
+      "Indices": [
+        {
+          "Name": "RDB$PRIMARY12",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "LANGUAGE_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "PAYMENT",
+      "Description": "This table records each payment made by a customer, with information such as the amount and the rental being paid for (when applicable). The table refers to the @table:CUSTOMER, @table:RENTAL, and @table:STAFF table.",
+      "Columns": [
+        {
+          "Name": "PAYMENT_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key used to uniquely identify each payment.",
+          "IsNullable": false
+        },
+        {
+          "Name": "CUSTOMER_ID",
+          "DataType": "INTEGER",
+          "Description": "The customer whose balance the payment is being applied to. This is a foreign key reference to the @table:CUSTOMER table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "STAFF_ID",
+          "DataType": "INTEGER",
+          "Description": "The staff member who processed the payment. This is a foreign key reference to the @table:STAFF table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "RENTAL_ID",
+          "DataType": "INTEGER",
+          "Description": "The rental that the payment is being applied to. This is optional because some payments are for outstanding fees and may not be directly related to a rental.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "AMOUNT",
+          "DataType": "DECIMAL",
+          "Description": "The amount of the payment.",
+          "IsNullable": false
+        },
+        {
+          "Name": "PAYMENT_DATE",
+          "DataType": "TIMESTAMP",
+          "Description": "The date the payment was processed.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "PAYMENT",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "PAYMENT_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_PAYMENT_CUSTOMER",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "ForeignTableName": "CUSTOMER",
+          "ForeignTableColumns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_PAYMENT_RENTAL",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "RENTAL_ID"
+            }
+          ],
+          "ForeignTableName": "RENTAL",
+          "ForeignTableColumns": [
+            {
+              "Name": "RENTAL_ID"
+            }
+          ],
+          "DeleteAction": "SetNull",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_PAYMENT_STAFF",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "ForeignTableName": "STAFF",
+          "ForeignTableColumns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_PAYMENT_CUSTOMER",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_PAYMENT_RENTAL",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "RENTAL_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_PAYMENT_STAFF",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_PAYMENT_FK_CUSTOMER_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_PAYMENT_FK_STAFF_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY13",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "PAYMENT_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "RENTAL",
+      "Description": "This table contains one row for each rental of each inventory item with information about who rented what item, when it was rented, and when it was returned. The table refers to the @table:INVENTORY, @table:CUSTOMER, and @table:STAFF tables and is referred to by the @table:PAYMENT table.",
+      "Columns": [
+        {
+          "Name": "RENTAL_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key that uniquely identifies the rental.",
+          "IsNullable": false
+        },
+        {
+          "Name": "RENTAL_DATE",
+          "DataType": "TIMESTAMP",
+          "Description": "The date and time that the item was rented.",
+          "IsNullable": false
+        },
+        {
+          "Name": "INVENTORY_ID",
+          "DataType": "INTEGER",
+          "Description": "The item being rented.",
+          "IsNullable": false
+        },
+        {
+          "Name": "CUSTOMER_ID",
+          "DataType": "INTEGER",
+          "Description": "The customer renting the item.",
+          "IsNullable": false
+        },
+        {
+          "Name": "RETURN_DATE",
+          "DataType": "TIMESTAMP",
+          "Description": "The date and time the item was returned.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "STAFF_ID",
+          "DataType": "INTEGER",
+          "Description": "The staff member who processed the rental.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "RENTAL",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "RENTAL_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_RENTAL_CUSTOMER",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "ForeignTableName": "CUSTOMER",
+          "ForeignTableColumns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_RENTAL_INVENTORY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "INVENTORY_ID"
+            }
+          ],
+          "ForeignTableName": "INVENTORY",
+          "ForeignTableColumns": [
+            {
+              "Name": "INVENTORY_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_RENTAL_STAFF",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "ForeignTableName": "STAFF",
+          "ForeignTableColumns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_RENTAL_CUSTOMER",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_RENTAL_INVENTORY",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "INVENTORY_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_RENTAL_STAFF",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_RENTAL",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "RENTAL_DATE"
+            },
+            {
+              "Name": "INVENTORY_ID"
+            },
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "IsUnique": true
+        },
+        {
+          "Name": "IDX_RENTAL_FK_CUSTOMER_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "CUSTOMER_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_RENTAL_FK_INVENTORY_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "INVENTORY_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_RENTAL_FK_STAFF_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY14",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "RENTAL_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "STAFF",
+      "Description": "This table lists all staff members, including information for email address, login information, and picture. The table refers to the @table:STORE and @table:ADDRESS tables using foreign keys, and is referred to by the @table:RENTAL, @table:PAYMENT, and @table:STORE tables.",
+      "Columns": [
+        {
+          "Name": "STAFF_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key that uniquely identifies the staff member.",
+          "IsNullable": false
+        },
+        {
+          "Name": "FIRST_NAME",
+          "DataType": "VARCHAR(45)",
+          "Description": "The first name of the staff member.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_NAME",
+          "DataType": "VARCHAR(45)",
+          "Description": "The last name of the staff member.",
+          "IsNullable": false
+        },
+        {
+          "Name": "ADDRESS_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key to the staff member address in the @table:ADDRESS table.",
+          "IsNullable": false
+        },
+        {
+          "Name": "PICTURE",
+          "DataType": "BLOB subtype binary",
+          "Description": "A BLOB containing a photograph of the employee.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "EMAIL",
+          "DataType": "VARCHAR(50)",
+          "Description": "The staff member email address.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "STORE_ID",
+          "DataType": "INTEGER",
+          "Description": "The staff member <i>home store</i>. The employee can work at other stores but is generally assigned to the store listed.",
+          "IsNullable": false
+        },
+        {
+          "Name": "ACTIVE",
+          "DataType": "BOOLEAN",
+          "Description": "Whether this is an active employee. If employees leave, their rows are not deleted from this table; instead, this column is set to <code>FALSE</code>.",
+          "IsNullable": false,
+          "Default": "DEFAULT TRUE"
+        },
+        {
+          "Name": "USERNAME",
+          "DataType": "VARCHAR(16)",
+          "Description": "The user name used by the staff member to access the rental system.",
+          "IsNullable": false
+        },
+        {
+          "Name": "PASSWORD",
+          "DataType": "VARCHAR(40)",
+          "Description": "The password used by the staff member to access the rental system. The password should be stored as a secure hash.",
+          "IsNullable": true,
+          "Default": "DEFAULT NULL"
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "STAFF",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "STAFF_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_STAFF_ADDRESS",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "ForeignTableName": "ADDRESS",
+          "ForeignTableColumns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_STAFF_STORE",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "ForeignTableName": "STORE",
+          "ForeignTableColumns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_STAFF_ADDRESS",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_STAFF_STORE",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_STAFF_FK_ADDRESS_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_STAFF_FK_STORE_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY15",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    },
+    {
+      "Name": "STORE",
+      "Description": "This table lists all stores in the system. All inventory is assigned to specific stores, and staff and customers are assigned a <i>home store</i>. The table refers to the @table:STAFF and @table:ADDRESS tables using foreign keys and is referred to by the @table:STAFF, @table:CUSTOMER, and @table:INVENTORY tables.",
+      "Columns": [
+        {
+          "Name": "STORE_ID",
+          "DataType": "INTEGER",
+          "Description": "A surrogate primary key that uniquely identifies the store.",
+          "IsNullable": false
+        },
+        {
+          "Name": "MANAGER_STAFF_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the manager of this store.",
+          "IsNullable": false
+        },
+        {
+          "Name": "ADDRESS_ID",
+          "DataType": "INTEGER",
+          "Description": "A foreign key identifying the address of this store.",
+          "IsNullable": false
+        },
+        {
+          "Name": "LAST_UPDATE",
+          "DataType": "TIMESTAMP",
+          "Description": "When the row was created or most recently updated.",
+          "IsNullable": false,
+          "Default": "DEFAULT CURRENT_TIMESTAMP"
+        }
+      ],
+      "PrimaryKey": {
+        "Name": "STORE",
+        "Description": null,
+        "Columns": [
+          {
+            "Name": "STORE_ID"
+          }
+        ]
+      },
+      "ForeignKeys": [
+        {
+          "Name": "FK_STORE_ADDRESS",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "ForeignTableName": "ADDRESS",
+          "ForeignTableColumns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        },
+        {
+          "Name": "FK_STORE_STAFF",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "MANAGER_STAFF_ID"
+            }
+          ],
+          "ForeignTableName": "STAFF",
+          "ForeignTableColumns": [
+            {
+              "Name": "STAFF_ID"
+            }
+          ],
+          "DeleteAction": "NoAction",
+          "UpdateAction": "Cascade"
+        }
+      ],
+      "Indices": [
+        {
+          "Name": "FK_STORE_ADDRESS",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "FK_STORE_STAFF",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "MANAGER_STAFF_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_STORE_FK_ADDRESS",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "ADDRESS_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "IDX_STORE_FK_MANAGER_STAFF_ID",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "MANAGER_STAFF_ID"
+            }
+          ],
+          "IsUnique": false
+        },
+        {
+          "Name": "RDB$PRIMARY16",
+          "Description": null,
+          "Columns": [
+            {
+              "Name": "STORE_ID"
+            }
+          ],
+          "IsUnique": true
+        }
+      ]
+    }
+  ],
+  "Views": [
+    {
+      "Name": "ACTOR_INFO",
+      "Description": "This view provides a list of all actors, including the films in which they have performed, broken down by category. The view incorporates data from the @table:FILM, @table:ACTOR, @table:CATEGORY, @table:FILM_ACTOR, and @table:FILM_CATEGORY tables.",
+      "Columns": [
+        {
+          "Name": "ACTOR_ID",
+          "DataType": "INTEGER",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "FIRST_NAME",
+          "DataType": "VARCHAR(45)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "LAST_NAME",
+          "DataType": "VARCHAR(45)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "FILM_INFO",
+          "DataType": "BLOB subtype text",
+          "Description": null,
+          "IsNullable": true
+        }
+      ],
+      "Source": "SELECT\r\n  a.actor_id,\r\n  a.first_name,\r\n  a.last_name,\r\n  LIST(\r\n    c.name||': '||(\r\n\t  SELECT \r\n\t    LIST(f.title, ', ')\r\n      FROM \r\n\t    film f\r\n      INNER JOIN \r\n\t    film_category fc ON f.film_id = fc.film_id\r\n      INNER JOIN \r\n\t    film_actor fa ON f.film_id = fa.film_id\r\n      WHERE \r\n\t    fc.category_id = c.category_id AND fa.actor_id = a.actor_id\r\n    ), '; ') AS film_info\r\nFROM \r\n  actor a\r\nLEFT JOIN \r\n  film_actor fa ON a.actor_id = fa.actor_id\r\nLEFT JOIN \r\n  film_category fc ON fa.film_id = fc.film_id\r\nLEFT JOIN \r\n  category c ON fc.category_id = c.category_id\r\nGROUP BY \r\n  a.actor_id, a.first_name, a.last_name"
+    },
+    {
+      "Name": "CUSTOMER_LIST",
+      "Description": "This view provides a list of customers, with first name and last name concatenated together and address information combined into a single view. The view incorporates data from the @table:CUSTOMER, @table:ADDRESS, @table:CITY, and @table:COUNTRY tables.",
+      "Columns": [
+        {
+          "Name": "ID",
+          "DataType": "INTEGER",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "NAME",
+          "DataType": "VARCHAR(91)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "ADDRESS",
+          "DataType": "VARCHAR(50)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "zip code",
+          "DataType": "VARCHAR(10)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "PHONE",
+          "DataType": "VARCHAR(20)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "CITY",
+          "DataType": "VARCHAR(50)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "COUNTRY",
+          "DataType": "VARCHAR(50)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "NOTES",
+          "DataType": "CHAR(6)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "SID",
+          "DataType": "INTEGER",
+          "Description": null,
+          "IsNullable": true
+        }
+      ],
+      "Source": "SELECT \r\n  cu.customer_id AS ID,\r\n  cu.first_name||' '||cu.last_name AS name,\r\n  a.address AS address,\r\n  a.postal_code AS \"zip code\",\r\n  a.phone AS phone,\r\n  city.city AS city,\r\n  country.country AS country,\r\n  case when cu.active=1 then 'active' else '' end AS notes,\r\n  cu.store_id AS SID\r\nFROM \r\n  customer AS cu \r\nJOIN  \r\n  address AS a ON cu.address_id = a.address_id \r\nJOIN \r\n  city ON a.city_id = city.city_id\r\nJOIN \r\n  country ON city.country_id = country.country_id"
+    },
+    {
+      "Name": "FILM_LIST",
+      "Description": "This view contains a formatted view of the @table:FILM table, with a comma-separated list of actors for each film. The view incorporates data from the @table:FILM, @table:CATEGORY, @table:FILM_CATEGORY, @table:ACTOR, and @table:FILM_ACTOR tables.",
+      "Columns": [
+        {
+          "Name": "FID",
+          "DataType": "INTEGER",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "TITLE",
+          "DataType": "VARCHAR(255)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "DESCRIPTION",
+          "DataType": "BLOB subtype text",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "CATEGORY",
+          "DataType": "VARCHAR(25)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "PRICE",
+          "DataType": "DECIMAL",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "LENGTH",
+          "DataType": "SMALLINT",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "RATING",
+          "DataType": "VARCHAR(5)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "ACTORS",
+          "DataType": "BLOB subtype text",
+          "Description": null,
+          "IsNullable": true
+        }
+      ],
+      "Source": "SELECT \r\n  film.film_id AS FID,\r\n  film.title AS title,\r\n  film.description AS description,\r\n  category.name AS category,\r\n  film.rental_rate AS price,\r\n  film.length AS length,\r\n  film.rating AS rating,\r\n  LIST(actor.first_name||' '||actor.last_name, ', ') AS actors\r\nFROM \r\n  film \r\nLEFT JOIN \r\n  film_category ON film_category.film_id = film.film_id\r\nLEFT JOIN \r\n  category ON category.category_id = film_category.category_id \r\nLEFT JOIN \r\n  film_actor ON film.film_id = film_actor.film_id \r\nLEFT JOIN \r\n  actor ON film_actor.actor_id = actor.actor_id\r\nGROUP BY \r\n  film.film_id, \r\n  category.name, \r\n  film.title,\r\n  film.description, \r\n  film.rental_rate, \r\n  film.length, \r\n  film.rating"
+    },
+    {
+      "Name": "NICER_BUT_SLOWER_FILM_LIST",
+      "Description": "This view contains a formatted view of the @table:FILM table, with a comma-separated list of the film's actors. The view differs from the @view:FILM_LIST view in the list of actors. The lettercase of the actor names is adjusted so that the first letter of each name is capitalized, rather than having the name in all-caps. As indicated in its name, this view performs additional processing and therefore takes longer to return data than the @view:FILM_LIST view. The view incorporates data from the @table:FILM, @table:CATEGORY, @table:FILM_CATEGORY, @table:ACTOR, and @table:FILM_ACTOR tables.",
+      "Columns": [
+        {
+          "Name": "FID",
+          "DataType": "INTEGER",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "TITLE",
+          "DataType": "VARCHAR(255)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "DESCRIPTION",
+          "DataType": "BLOB subtype text",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "CATEGORY",
+          "DataType": "VARCHAR(25)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "PRICE",
+          "DataType": "DECIMAL",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "LENGTH",
+          "DataType": "SMALLINT",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "RATING",
+          "DataType": "VARCHAR(5)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "ACTORS",
+          "DataType": "BLOB subtype text",
+          "Description": null,
+          "IsNullable": true
+        }
+      ],
+      "Source": "SELECT \r\n  film.film_id AS FID, \r\n  film.title AS title, \r\n  film.description AS description, \r\n  category.name AS category, \r\n  film.rental_rate AS price,\r\n  film.length AS length, \r\n  film.rating AS rating, \r\n  LIST(\r\n\tUPPER(SUBSTRING(actor.first_name from 1 for 1))||LOWER(SUBSTRING(actor.first_name from 2 for CHAR_LENGTH(actor.first_name)))||' '||\r\n\tUPPER(SUBSTRING(actor.last_name from 1 for 1))||LOWER(SUBSTRING(actor.last_name from 2 for CHAR_LENGTH(actor.last_name))), ', ') AS actors\r\nFROM \r\n  film \r\nLEFT JOIN \r\n  film_category ON film_category.film_id = film.film_id\r\nLEFT JOIN \r\n  category ON category.category_id = film_category.category_id \r\nLEFT JOIN \r\n  film_actor ON film.film_id = film_actor.film_id \r\nLEFT JOIN \r\n  actor ON film_actor.actor_id = actor.actor_id\r\nGROUP BY \r\n  film.film_id, \r\n  category.name, \r\n  film.title,\r\n  film.description, \r\n  film.rental_rate, \r\n  film.length, \r\n  film.rating"
+    },
+    {
+      "Name": "SALES_BY_FILM_CATEGORY",
+      "Description": "This view provides a list of total sales, broken down by individual film category. Because a film can be listed in multiple categories, it is not advisable to calculate aggregate sales by totalling the rows of this view. The view incorporates data from the @table:CATEGORY, @table:PAYMENT, @table:RENTAL, @table:INVENTORY, @table:FILM, @table:FILM_CATEGORY, and @table:CATEGORY tables.",
+      "Columns": [
+        {
+          "Name": "CATEGORY",
+          "DataType": "VARCHAR(25)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "TOTAL_SALES",
+          "DataType": "DECIMAL",
+          "Description": null,
+          "IsNullable": true
+        }
+      ],
+      "Source": "SELECT\r\n  c.name AS category, \r\n  SUM(p.amount) AS total_sales\r\nFROM \r\n  payment AS p\r\nINNER JOIN \r\n  rental AS r ON p.rental_id = r.rental_id\r\nINNER JOIN \r\n  inventory AS i ON r.inventory_id = i.inventory_id\r\nINNER JOIN \r\n  film AS f ON i.film_id = f.film_id\r\nINNER JOIN \r\n  film_category AS fc ON f.film_id = fc.film_id\r\nINNER JOIN \r\n  category AS c ON fc.category_id = c.category_id\r\nGROUP BY \r\n  c.name\r\nORDER BY \r\n  total_sales DESC"
+    },
+    {
+      "Name": "SALES_BY_STORE",
+      "Description": "This view provides a list of total sales, broken down by store. The view returns the store location, manager name, and total sales. The view incorporates data from the @table:CITY, @table:COUNTRY, @table:PAYMENT, @table:RENTAL, @table:INVENTORY, @table:STORE, @table:ADDRESS, and @table:STAFF tables.",
+      "Columns": [
+        {
+          "Name": "STORE",
+          "DataType": "VARCHAR(101)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "MANAGER",
+          "DataType": "VARCHAR(91)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "TOTAL_SALES",
+          "DataType": "DECIMAL",
+          "Description": null,
+          "IsNullable": true
+        }
+      ],
+      "Source": "SELECT\r\n  c.city||','||cy.country AS store,\r\n  m.first_name||' '||m.last_name AS manager,\r\n  SUM(p.amount) AS total_sales\r\nFROM \r\n  payment AS p\r\nINNER JOIN \r\n  rental AS r ON p.rental_id = r.rental_id\r\nINNER JOIN \r\n  inventory AS i ON r.inventory_id = i.inventory_id\r\nINNER JOIN \r\n  store AS s ON i.store_id = s.store_id\r\nINNER JOIN \r\n  address AS a ON s.address_id = a.address_id\r\nINNER JOIN \r\n  city AS c ON a.city_id = c.city_id\r\nINNER JOIN \r\n  country AS cy ON c.country_id = cy.country_id\r\nINNER JOIN \r\n  staff AS m ON s.manager_staff_id = m.staff_id\r\nGROUP BY \r\n  s.store_id, store, manager"
+    },
+    {
+      "Name": "STAFF_LIST",
+      "Description": "This view provides a list of all staff members, including address and store information. The view incorporates data from the @table:STAFF and @table:ADDRESS tables.",
+      "Columns": [
+        {
+          "Name": "ID",
+          "DataType": "INTEGER",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "NAME",
+          "DataType": "VARCHAR(91)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "ADDRESS",
+          "DataType": "VARCHAR(50)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "zip code",
+          "DataType": "VARCHAR(10)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "PHONE",
+          "DataType": "VARCHAR(20)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "CITY",
+          "DataType": "VARCHAR(50)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "COUNTRY",
+          "DataType": "VARCHAR(50)",
+          "Description": null,
+          "IsNullable": true
+        },
+        {
+          "Name": "SID",
+          "DataType": "INTEGER",
+          "Description": null,
+          "IsNullable": true
+        }
+      ],
+      "Source": "SELECT \r\n  s.staff_id AS ID,\r\n  s.first_name||' '||s.last_name AS name, \r\n  a.address AS address, \r\n  a.postal_code AS \"zip code\",\r\n  a.phone AS phone,\r\n  city.city AS city, \r\n  country.country AS country, \r\n  s.store_id AS SID\r\nFROM \r\n  staff AS s \r\nJOIN \r\n  address AS a ON s.address_id = a.address_id \r\nJOIN \r\n  city ON a.city_id = city.city_id\r\nJOIN \r\n  country ON city.country_id = country.country_id"
+    }
+  ]
+}

@@ -1,0 +1,2011 @@
+{
+  "Name": "Sakila Sample PostgreSQL Schema",
+  "Version": "10",
+  "Description": "Sakila Sample Database Schema for PostgreSQL",
+  "DbmsName": "PostgreSQL",
+  "DbmsVersion": "14.4",
+  "Schemata": [
+    {
+      "Name": "public",
+      "Description": null
+    },
+    {
+      "Name": "sakila",
+      "Description": null,
+      "Tables": [
+        {
+          "Name": "actor",
+          "Description": "This table lists information for all actors. The table is joined to the @table:film table by means of the @table:film_actor table.",
+          "Columns": [
+            {
+              "Name": "actor_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each actor in the table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "first_name",
+              "DataType": "character varying(45)",
+              "Description": "The actor first name.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_name",
+              "DataType": "character varying(45)",
+              "Description": "The actor last name.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "actor",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "actor_id"
+              }
+            ]
+          },
+          "Indices": [
+            {
+              "Name": "actor_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "actor_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_actor_last_name",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "last_name"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "address",
+          "Description": "This table contains address information for customers, staff, and stores. The table primary key appears as a foreign key in the @table:customer, @table:staff, and @table:store tables.",
+          "Columns": [
+            {
+              "Name": "address_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each address in the table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "address",
+              "DataType": "character varying(50)",
+              "Description": "The first line of an address.",
+              "IsNullable": false
+            },
+            {
+              "Name": "address2",
+              "DataType": "character varying(50)",
+              "Description": "An optional second line of an address.",
+              "IsNullable": true,
+              "Default": "NULL::character varying"
+            },
+            {
+              "Name": "district",
+              "DataType": "character varying(20)",
+              "Description": "The region of an address, this may be a state, province, prefecture, etc.",
+              "IsNullable": false
+            },
+            {
+              "Name": "city_id",
+              "DataType": "smallint",
+              "Description": "A foreign key pointing to the @table:city table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "postal_code",
+              "DataType": "character varying(10)",
+              "Description": "The postal code or ZIP code of the address (where applicable).",
+              "IsNullable": true,
+              "Default": "NULL::character varying"
+            },
+            {
+              "Name": "phone",
+              "DataType": "character varying(20)",
+              "Description": "The telephone number for the address.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "address",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "address_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_address_city",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "city_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "city",
+              "ForeignTableColumns": [
+                {
+                  "Name": "city_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "address_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_address_fk_city_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "city_id"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "category",
+          "Description": "This table lists the categories that can be assigned to a film. The table is joined to the @table:film table by means of the @table:film_category table.",
+          "Columns": [
+            {
+              "Name": "category_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each category in the table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "name",
+              "DataType": "character varying(25)",
+              "Description": "The name of the category.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "category",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "category_id"
+              }
+            ]
+          },
+          "Indices": [
+            {
+              "Name": "category_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "category_id"
+                }
+              ],
+              "IsUnique": true
+            }
+          ]
+        },
+        {
+          "Name": "city",
+          "Description": "This table contains a list of cities. The table is referred to by a foreign key in the @table:address table and refers to the @table:country table using a foreign key.",
+          "Columns": [
+            {
+              "Name": "city_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each city in the table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "city",
+              "DataType": "character varying(50)",
+              "Description": "The name of the city.",
+              "IsNullable": false
+            },
+            {
+              "Name": "country_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the country that the city belongs to.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "city",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "city_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_city_country",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "country_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "country",
+              "ForeignTableColumns": [
+                {
+                  "Name": "country_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "city_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "city_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_city_fk_country_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "country_id"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "country",
+          "Description": "This table contains a list of countries. The table is referred to by a foreign key in the @table:CITY table.",
+          "Columns": [
+            {
+              "Name": "country_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each country in the table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "country",
+              "DataType": "character varying(50)",
+              "Description": "The name of the country.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "country",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "country_id"
+              }
+            ]
+          },
+          "Indices": [
+            {
+              "Name": "country_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "country_id"
+                }
+              ],
+              "IsUnique": true
+            }
+          ]
+        },
+        {
+          "Name": "customer",
+          "Description": "This table contains a list of all customers.<br>The table is referred to in the @table:payment and @table:rental tables and refers to the @table:address and @table:store tables using foreign keys.",
+          "Columns": [
+            {
+              "Name": "customer_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each customer in the table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "store_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the customer <i>home store</i>. Customers are not limited to renting only from this store, but this is the store at which they generally shop.",
+              "IsNullable": false
+            },
+            {
+              "Name": "first_name",
+              "DataType": "character varying(45)",
+              "Description": "The customer first name.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_name",
+              "DataType": "character varying(45)",
+              "Description": "The customer last name.",
+              "IsNullable": false
+            },
+            {
+              "Name": "email",
+              "DataType": "character varying(50)",
+              "Description": "The customer email address.",
+              "IsNullable": true,
+              "Default": "NULL::character varying"
+            },
+            {
+              "Name": "address_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the customer address in the @table:address table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "active",
+              "DataType": "boolean",
+              "Description": "Indicates whether the customer is an active customer. Setting this to <code>FALSE</code> serves <br> as an alternative to deleting a customer outright. Most queries should have a <code>WHERE active = TRUE</code> clause.",
+              "IsNullable": false,
+              "Default": "true"
+            },
+            {
+              "Name": "create_date",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "The date the customer was added to the system. This date is automatically set using a trigger during an <code>INSERT</code>.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": true,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "customer",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "customer_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_customer_address",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "address",
+              "ForeignTableColumns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_customer_store",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "store",
+              "ForeignTableColumns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "customer_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "customer_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_customer_fk_address_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_customer_fk_store_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_customer_last_name",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "last_name"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "film",
+          "Description": "This table is a list of all films potentially in stock in the stores. The actual in-stock copies of each film are represented in the inventory table. The table refers to the @table:language table and is referred to by the @table:film_category, @table:film_actor, and @table:inventory tables.",
+          "Columns": [
+            {
+              "Name": "film_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each film in the table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "title",
+              "DataType": "character varying(128)",
+              "Description": "The title of the film.",
+              "IsNullable": false
+            },
+            {
+              "Name": "description",
+              "DataType": "text",
+              "Description": "A short description or plot summary of the film.",
+              "IsNullable": true
+            },
+            {
+              "Name": "release_year",
+              "DataType": "sakila.yearonly",
+              "Description": "The year in which the movie was released.",
+              "IsNullable": true,
+              "Default": "NULL::integer"
+            },
+            {
+              "Name": "language_id",
+              "DataType": "smallint",
+              "Description": "A foreign key pointing at the @table:language table; identifies the language of the film.",
+              "IsNullable": false
+            },
+            {
+              "Name": "original_language_id",
+              "DataType": "smallint",
+              "Description": "A foreign key pointing at the @table:language table; identifies the original language of the film. Used when a film has been dubbed into a new language.",
+              "IsNullable": true
+            },
+            {
+              "Name": "rental_duration",
+              "DataType": "smallint",
+              "Description": "The length of the rental period, in days.",
+              "IsNullable": false,
+              "Default": "3"
+            },
+            {
+              "Name": "rental_rate",
+              "DataType": "numeric(4,2)",
+              "Description": "The cost to rent the film for the period specified in the <code>rental_duration</code> column.",
+              "IsNullable": false,
+              "Default": "4.99"
+            },
+            {
+              "Name": "length",
+              "DataType": "smallint",
+              "Description": "The duration of the film, in minutes.",
+              "IsNullable": true
+            },
+            {
+              "Name": "replacement_cost",
+              "DataType": "numeric(5,2)",
+              "Description": "The amount charged to the customer if the film is not returned or is returned in a damaged state.",
+              "IsNullable": false,
+              "Default": "19.99"
+            },
+            {
+              "Name": "rating",
+              "DataType": "sakila.rating",
+              "Description": "The rating assigned to the film. Can be one of: <code>G</code>, <code>PG</code>, <code>PG-13</code>, <code>R</code>, or <code>NC-17</code>.",
+              "IsNullable": true,
+              "Default": "'G'::sakila.rating",
+              "ValidValues": [
+                {
+                  "Value": "G",
+                  "Description": "General audiences – All ages admitted."
+                },
+                {
+                  "Value": "PG",
+                  "Description": "Parental guidance suggested – Some material may not be suitable for children."
+                },
+                {
+                  "Value": "PG-13",
+                  "Description": "Parents strongly cautioned – Some material may be inappropriate for children under 13."
+                },
+                {
+                  "Value": "R",
+                  "Description": "Restricted – Under 17 requires accompanying parent or adult guardian."
+                },
+                {
+                  "Value": "NC-17",
+                  "Description": "No children under 17 admitted."
+                }
+              ]
+            },
+            {
+              "Name": "special_features",
+              "DataType": "text[]",
+              "Description": "Lists which common special features are included on the DVD. Can be zero or more of: <code>Trailers</code>, <code>Commentaries</code>, <code>Deleted Scenes</code>, <code>Behind the Scenes</code>.",
+              "IsNullable": true,
+              "IsArray": true
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "film",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "film_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_film_language",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "language_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "language",
+              "ForeignTableColumns": [
+                {
+                  "Name": "language_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_film_language_original",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "original_language_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "language",
+              "ForeignTableColumns": [
+                {
+                  "Name": "language_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "film_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_film_fk_language_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "language_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_film_fk_original_language_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "original_language_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_film_title",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "title"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "film_actor",
+          "Description": "This table is used to support a many-to-many relationship between films and actors. For each actor in a given film, there will be one row in the @table:film_actor table listing the actor and film. The table refers to the @table:film and @table:actor tables using foreign keys.",
+          "Columns": [
+            {
+              "Name": "actor_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the actor.",
+              "IsNullable": false
+            },
+            {
+              "Name": "film_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the film.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "film_actor",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "actor_id"
+              },
+              {
+                "Name": "film_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_film_actor_actor",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "actor_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "actor",
+              "ForeignTableColumns": [
+                {
+                  "Name": "actor_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_film_actor_film",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "film",
+              "ForeignTableColumns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "film_actor_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "actor_id"
+                },
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_film_actor_fk_film_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "film_category",
+          "Description": "This table is used to support a many-to-many relationship between films and categories. For each category applied to a film, there will be one row in the @table:film_category table listing the category and film. The table refers to the @table:film and @table:category tables using foreign keys.",
+          "Columns": [
+            {
+              "Name": "film_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the film.",
+              "IsNullable": false
+            },
+            {
+              "Name": "category_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the category.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "film_category",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "film_id"
+              },
+              {
+                "Name": "category_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_film_category_category",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "category_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "category",
+              "ForeignTableColumns": [
+                {
+                  "Name": "category_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_film_category_film",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "film",
+              "ForeignTableColumns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "film_category_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                },
+                {
+                  "Name": "category_id"
+                }
+              ],
+              "IsUnique": true
+            }
+          ]
+        },
+        {
+          "Name": "film_text",
+          "Description": "This table contains the <code>film_id</code>, <code>title</code> and <code>description</code> columns of the @table:film table, with the contents of the table kept in synchrony with the @table:film table by means of triggers on @table:film table <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> operations.",
+          "Columns": [
+            {
+              "Name": "film_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each film in the table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "title",
+              "DataType": "character varying(255)",
+              "Description": "The title of the film.",
+              "IsNullable": false
+            },
+            {
+              "Name": "description",
+              "DataType": "text",
+              "Description": "A short description or plot summary of the film.",
+              "IsNullable": true
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "film_text",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "film_id"
+              }
+            ]
+          },
+          "Indices": [
+            {
+              "Name": "film_text_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_film_text_title_description",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "title"
+                },
+                {
+                  "Name": "description"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "inventory",
+          "Description": "This table contains one row for each copy of a given film in a given store. The table refers to the @table:film and @table:store tables using foreign keys and is referred to by the @table:rental table.",
+          "Columns": [
+            {
+              "Name": "inventory_id",
+              "DataType": "integer",
+              "Description": "A surrogate primary key used to uniquely identify each item in inventory.",
+              "IsNullable": false
+            },
+            {
+              "Name": "film_id",
+              "DataType": "smallint",
+              "Description": "A foreign key pointing to the film this item represents.",
+              "IsNullable": false
+            },
+            {
+              "Name": "store_id",
+              "DataType": "smallint",
+              "Description": "A foreign key pointing to the store stocking this item.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "inventory",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "inventory_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_inventory_film",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "film",
+              "ForeignTableColumns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_inventory_store",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "store",
+              "ForeignTableColumns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "inventory_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "inventory_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_inventory_fk_film_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_inventory_store_id_film_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "film_id"
+                },
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "language",
+          "Description": "This table is a lookup table listing the possible languages that films can have for their language and original language values. The table is referred to by the @table:film table.",
+          "Columns": [
+            {
+              "Name": "language_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each language.",
+              "IsNullable": false
+            },
+            {
+              "Name": "name",
+              "DataType": "character(20)",
+              "Description": "The English name of the language.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "language",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "language_id"
+              }
+            ]
+          },
+          "Indices": [
+            {
+              "Name": "language_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "language_id"
+                }
+              ],
+              "IsUnique": true
+            }
+          ]
+        },
+        {
+          "Name": "payment",
+          "Description": "This table records each payment made by a customer, with information such as the amount and the rental being paid for (when applicable). The table refers to the @table:customer, @table:rental, and @table:staff table.",
+          "Columns": [
+            {
+              "Name": "payment_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key used to uniquely identify each payment.",
+              "IsNullable": false
+            },
+            {
+              "Name": "customer_id",
+              "DataType": "smallint",
+              "Description": "The customer whose balance the payment is being applied to. This is a foreign key reference to the @table:customer table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "staff_id",
+              "DataType": "smallint",
+              "Description": "The staff member who processed the payment. This is a foreign key reference to the @table:staff table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "rental_id",
+              "DataType": "integer",
+              "Description": "The rental that the payment is being applied to. This is optional because some payments are for outstanding fees and may not be directly related to a rental.",
+              "IsNullable": true
+            },
+            {
+              "Name": "amount",
+              "DataType": "numeric(5,2)",
+              "Description": "The amount of the payment.",
+              "IsNullable": false
+            },
+            {
+              "Name": "payment_date",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "The date the payment was processed.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": true,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "payment",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "payment_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_payment_customer",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "customer_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "customer",
+              "ForeignTableColumns": [
+                {
+                  "Name": "customer_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_payment_rental",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "rental_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "rental",
+              "ForeignTableColumns": [
+                {
+                  "Name": "rental_id"
+                }
+              ],
+              "DeleteAction": "SetNull",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_payment_staff",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "staff_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "staff",
+              "ForeignTableColumns": [
+                {
+                  "Name": "staff_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "payment_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "payment_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_payment_fk_customer_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "customer_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_payment_fk_staff_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "staff_id"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "rental",
+          "Description": "This table contains one row for each rental of each inventory item with information about who rented what item, when it was rented, and when it was returned. The table refers to the @table:inventory, @table:customer, and @table:staff tables and is referred to by the @table:payment table.",
+          "Columns": [
+            {
+              "Name": "rental_id",
+              "DataType": "integer",
+              "Description": "A surrogate primary key that uniquely identifies the rental.",
+              "IsNullable": false
+            },
+            {
+              "Name": "rental_date",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "The date and time that the item was rented.",
+              "IsNullable": false
+            },
+            {
+              "Name": "inventory_id",
+              "DataType": "integer",
+              "Description": "The item being rented.",
+              "IsNullable": false
+            },
+            {
+              "Name": "customer_id",
+              "DataType": "smallint",
+              "Description": "The customer renting the item.",
+              "IsNullable": false
+            },
+            {
+              "Name": "return_date",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "The date and time the item was returned.",
+              "IsNullable": true,
+              "Default": "NULL::timestamp without time zone"
+            },
+            {
+              "Name": "staff_id",
+              "DataType": "smallint",
+              "Description": "The staff member who processed the rental.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "rental",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "rental_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_rental_customer",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "customer_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "customer",
+              "ForeignTableColumns": [
+                {
+                  "Name": "customer_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_rental_inventory",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "inventory_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "inventory",
+              "ForeignTableColumns": [
+                {
+                  "Name": "inventory_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_rental_staff",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "staff_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "staff",
+              "ForeignTableColumns": [
+                {
+                  "Name": "staff_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "rental_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "rental_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_rental_fk_customer_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "customer_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_rental_fk_inventory_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "inventory_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_rental_fk_staff_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "staff_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "rental_rental_date_inventory_id_customer_id_key",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "rental_date"
+                },
+                {
+                  "Name": "inventory_id"
+                },
+                {
+                  "Name": "customer_id"
+                }
+              ],
+              "IsUnique": true
+            }
+          ]
+        },
+        {
+          "Name": "staff",
+          "Description": "This table lists all staff members, including information for email address, login information, and picture. The table refers to the @table:store and @table:address tables using foreign keys, and is referred to by the @table:rental, @table:payment, and @table:store tables.",
+          "Columns": [
+            {
+              "Name": "staff_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key that uniquely identifies the staff member.",
+              "IsNullable": false
+            },
+            {
+              "Name": "first_name",
+              "DataType": "character varying(45)",
+              "Description": "The first name of the staff member.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_name",
+              "DataType": "character varying(45)",
+              "Description": "The last name of the staff member.",
+              "IsNullable": false
+            },
+            {
+              "Name": "address_id",
+              "DataType": "smallint",
+              "Description": "A foreign key to the staff member address in the @table:address table.",
+              "IsNullable": false
+            },
+            {
+              "Name": "picture",
+              "DataType": "bytea",
+              "Description": "A BLOB containing a photograph of the employee.",
+              "IsNullable": true
+            },
+            {
+              "Name": "email",
+              "DataType": "character varying(50)",
+              "Description": "The staff member email address.",
+              "IsNullable": true,
+              "Default": "NULL::character varying"
+            },
+            {
+              "Name": "store_id",
+              "DataType": "smallint",
+              "Description": "The staff member <i>home store</i>. The employee can work at other stores but is generally assigned to the store listed.",
+              "IsNullable": false
+            },
+            {
+              "Name": "active",
+              "DataType": "boolean",
+              "Description": "Whether this is an active employee. If employees leave, their rows are not deleted from this table; instead, this column is set to <code>FALSE</code>.",
+              "IsNullable": false,
+              "Default": "true"
+            },
+            {
+              "Name": "username",
+              "DataType": "character varying(16)",
+              "Description": "The user name used by the staff member to access the rental system.",
+              "IsNullable": false
+            },
+            {
+              "Name": "password",
+              "DataType": "character varying(40)",
+              "Description": "The password used by the staff member to access the rental system. The password should be stored as a secure hash.",
+              "IsNullable": true,
+              "Default": "NULL::character varying"
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": null,
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "staff",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "staff_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_staff_address",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "address",
+              "ForeignTableColumns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_staff_store",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "store",
+              "ForeignTableColumns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "staff_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "staff_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_staff_fk_address_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "idx_staff_fk_store_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "IsUnique": false
+            }
+          ]
+        },
+        {
+          "Name": "store",
+          "Description": "This table lists all stores in the system. All inventory is assigned to specific stores, and staff and customers are assigned a <i>home store</i>. The table refers to the @table:STAFF and @table:ADDRESS tables using foreign keys and is referred to by the @table:STAFF, @table:CUSTOMER, and @table:INVENTORY tables.",
+          "Columns": [
+            {
+              "Name": "store_id",
+              "DataType": "smallint",
+              "Description": "A surrogate primary key that uniquely identifies the store.",
+              "IsNullable": false
+            },
+            {
+              "Name": "manager_staff_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the manager of this store.",
+              "IsNullable": false
+            },
+            {
+              "Name": "address_id",
+              "DataType": "smallint",
+              "Description": "A foreign key identifying the address of this store.",
+              "IsNullable": false
+            },
+            {
+              "Name": "last_update",
+              "DataType": "timestamp(0) without time zone",
+              "Description": "When the row was created or most recently updated.",
+              "IsNullable": false,
+              "Default": "CURRENT_TIMESTAMP"
+            }
+          ],
+          "PrimaryKey": {
+            "Name": "store",
+            "Description": null,
+            "Columns": [
+              {
+                "Name": "store_id"
+              }
+            ]
+          },
+          "ForeignKeys": [
+            {
+              "Name": "fk_store_address",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "address",
+              "ForeignTableColumns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            },
+            {
+              "Name": "fk_store_staff",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "manager_staff_id"
+                }
+              ],
+              "ForeignTableSchema": "sakila",
+              "ForeignTableName": "staff",
+              "ForeignTableColumns": [
+                {
+                  "Name": "staff_id"
+                }
+              ],
+              "DeleteAction": "Restrict",
+              "UpdateAction": "Cascade"
+            }
+          ],
+          "Indices": [
+            {
+              "Name": "store_pkey",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "store_id"
+                }
+              ],
+              "IsUnique": true
+            },
+            {
+              "Name": "idx_store_fk_address_id",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "address_id"
+                }
+              ],
+              "IsUnique": false
+            },
+            {
+              "Name": "store_manager_staff_id_key",
+              "Description": null,
+              "Columns": [
+                {
+                  "Name": "manager_staff_id"
+                }
+              ],
+              "IsUnique": true
+            }
+          ]
+        }
+      ],
+      "Views": [
+        {
+          "Name": "actor_info",
+          "Description": "This view provides a list of all actors, including the films in which they have performed, broken down by category. The view incorporates data from the @table:film, @table:actor, @table:category, @table:film_actor, and @table:film_category tables.",
+          "Columns": [
+            {
+              "Name": "actor_id",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "first_name",
+              "DataType": "character varying(45)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "last_name",
+              "DataType": "character varying(45)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "film_info",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            }
+          ],
+          "Source": " SELECT a.actor_id,\n    a.first_name,\n    a.last_name,\n    string_agg(DISTINCT concat(c.name, ': ', ( SELECT string_agg((f.title)::text, ', '::text ORDER BY f.title) AS string_agg\n           FROM ((sakila.film f\n             JOIN sakila.film_category fc_1 ON ((f.film_id = fc_1.film_id)))\n             JOIN sakila.film_actor fa_1 ON ((f.film_id = fa_1.film_id)))\n          WHERE ((fc_1.category_id = c.category_id) AND (fa_1.actor_id = a.actor_id)))), '; '::text) AS film_info\n   FROM (((sakila.actor a\n     LEFT JOIN sakila.film_actor fa ON ((a.actor_id = fa.actor_id)))\n     LEFT JOIN sakila.film_category fc ON ((fa.film_id = fc.film_id)))\n     LEFT JOIN sakila.category c ON ((fc.category_id = c.category_id)))\n  GROUP BY a.actor_id, a.first_name, a.last_name;"
+        },
+        {
+          "Name": "customer_list",
+          "Description": "This view provides a list of customers, with first name and last name concatenated together and address information combined into a single view. The view incorporates data from the @table:customer, @table:address, @table:city, and @table:country tables.",
+          "Columns": [
+            {
+              "Name": "id",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "name",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "address",
+              "DataType": "character varying(50)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "zip code",
+              "DataType": "character varying(10)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "phone",
+              "DataType": "character varying(20)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "city",
+              "DataType": "character varying(50)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "country",
+              "DataType": "character varying(50)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "notes",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "sid",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            }
+          ],
+          "Source": " SELECT cu.customer_id AS id,\n    concat((cu.first_name)::text, ' '::text, (cu.last_name)::text) AS name,\n    a.address,\n    a.postal_code AS \"zip code\",\n    a.phone,\n    city.city,\n    country.country,\n        CASE\n            WHEN cu.active THEN 'active'::text\n            ELSE ''::text\n        END AS notes,\n    cu.store_id AS sid\n   FROM (((sakila.customer cu\n     JOIN sakila.address a ON ((cu.address_id = a.address_id)))\n     JOIN sakila.city ON ((a.city_id = city.city_id)))\n     JOIN sakila.country ON ((city.country_id = country.country_id)));"
+        },
+        {
+          "Name": "film_list",
+          "Description": "This view contains a formatted view of the @table:film table, with a comma-separated list of actors for each film. The view incorporates data from the @table:film, @table:category, @table:film_category, @table:actor, and @table:film_actor tables.",
+          "Columns": [
+            {
+              "Name": "fid",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "title",
+              "DataType": "character varying(128)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "description",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "category",
+              "DataType": "character varying(25)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "price",
+              "DataType": "numeric(4,2)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "length",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "rating",
+              "DataType": "sakila.rating",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "actors",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            }
+          ],
+          "Source": " SELECT film.film_id AS fid,\n    film.title,\n    film.description,\n    category.name AS category,\n    film.rental_rate AS price,\n    film.length,\n    film.rating,\n    string_agg(concat((actor.first_name)::text, ' '::text, (actor.last_name)::text), ', '::text) AS actors\n   FROM ((((sakila.film\n     LEFT JOIN sakila.film_category ON ((film_category.film_id = film.film_id)))\n     LEFT JOIN sakila.category ON ((category.category_id = film_category.category_id)))\n     LEFT JOIN sakila.film_actor ON ((film.film_id = film_actor.film_id)))\n     LEFT JOIN sakila.actor ON ((film_actor.actor_id = actor.actor_id)))\n  GROUP BY film.film_id, category.name;"
+        },
+        {
+          "Name": "nicer_but_slower_film_list",
+          "Description": "This view contains a formatted view of the @table:FILM table, with a comma-separated list of the film's actors. The view differs from the @view:film_list view in the list of actors. The lettercase of the actor names is adjusted so that the first letter of each name is capitalized, rather than having the name in all-caps. As indicated in its name, this view performs additional processing and therefore takes longer to return data than the @view:film_list view. The view incorporates data from the @table:film, @table:category, @table:film_category, @table:actor, and @table:film_actor tables.",
+          "Columns": [
+            {
+              "Name": "fid",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "title",
+              "DataType": "character varying(128)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "description",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "category",
+              "DataType": "character varying(25)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "price",
+              "DataType": "numeric(4,2)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "length",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "rating",
+              "DataType": "sakila.rating",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "actors",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            }
+          ],
+          "Source": " SELECT film.film_id AS fid,\n    film.title,\n    film.description,\n    category.name AS category,\n    film.rental_rate AS price,\n    film.length,\n    film.rating,\n    string_agg(concat(concat(upper(\"substring\"((actor.first_name)::text, 1, 1)), lower(\"substring\"((actor.first_name)::text, 2, length((actor.first_name)::text))), ' '::text, concat(upper(\"substring\"((actor.last_name)::text, 1, 1)), lower(\"substring\"((actor.last_name)::text, 2, length((actor.last_name)::text)))))), ', '::text) AS actors\n   FROM ((((sakila.film\n     LEFT JOIN sakila.film_category ON ((film_category.film_id = film.film_id)))\n     LEFT JOIN sakila.category ON ((category.category_id = film_category.category_id)))\n     LEFT JOIN sakila.film_actor ON ((film.film_id = film_actor.film_id)))\n     LEFT JOIN sakila.actor ON ((film_actor.actor_id = actor.actor_id)))\n  GROUP BY film.film_id, category.name;"
+        },
+        {
+          "Name": "sales_by_film_category",
+          "Description": "This view provides a list of total sales, broken down by individual film category. Because a film can be listed in multiple categories, it is not advisable to calculate aggregate sales by totalling the rows of this view. The view incorporates data from the @table:category, @table:payment, @table:rental, @table:inventory, @table:film, @table:film_category, and @table:category tables.",
+          "Columns": [
+            {
+              "Name": "category",
+              "DataType": "character varying(25)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "total_sales",
+              "DataType": "numeric",
+              "Description": null,
+              "IsNullable": true
+            }
+          ],
+          "Source": " SELECT c.name AS category,\n    sum(p.amount) AS total_sales\n   FROM (((((sakila.payment p\n     JOIN sakila.rental r ON ((p.rental_id = r.rental_id)))\n     JOIN sakila.inventory i ON ((r.inventory_id = i.inventory_id)))\n     JOIN sakila.film f ON ((i.film_id = f.film_id)))\n     JOIN sakila.film_category fc ON ((f.film_id = fc.film_id)))\n     JOIN sakila.category c ON ((fc.category_id = c.category_id)))\n  GROUP BY c.name\n  ORDER BY (sum(p.amount)) DESC;"
+        },
+        {
+          "Name": "sales_by_store",
+          "Description": "This view provides a list of total sales, broken down by store. The view returns the store location, manager name, and total sales. The view incorporates data from the @table:CITY, @table:COUNTRY, @table:PAYMENT, @table:RENTAL, @table:INVENTORY, @table:STORE, @table:ADDRESS, and @table:STAFF tables.",
+          "Columns": [
+            {
+              "Name": "store",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "manager",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "total_sales",
+              "DataType": "numeric",
+              "Description": null,
+              "IsNullable": true
+            }
+          ],
+          "Source": " SELECT concat((c.city)::text, ','::text, (cy.country)::text) AS store,\n    concat((m.first_name)::text, ' '::text, (m.last_name)::text) AS manager,\n    sum(p.amount) AS total_sales\n   FROM (((((((sakila.payment p\n     JOIN sakila.rental r ON ((p.rental_id = r.rental_id)))\n     JOIN sakila.inventory i ON ((r.inventory_id = i.inventory_id)))\n     JOIN sakila.store s ON ((i.store_id = s.store_id)))\n     JOIN sakila.address a ON ((s.address_id = a.address_id)))\n     JOIN sakila.city c ON ((a.city_id = c.city_id)))\n     JOIN sakila.country cy ON ((c.country_id = cy.country_id)))\n     JOIN sakila.staff m ON ((s.manager_staff_id = m.staff_id)))\n  GROUP BY cy.country, c.city, s.store_id, m.first_name, m.last_name\n  ORDER BY cy.country, c.city;"
+        },
+        {
+          "Name": "staff_list",
+          "Description": "This view provides a list of all staff members, including address and store information. The view incorporates data from the @table:staff and @table:address tables.",
+          "Columns": [
+            {
+              "Name": "id",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "name",
+              "DataType": "text",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "address",
+              "DataType": "character varying(50)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "zip code",
+              "DataType": "character varying(10)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "phone",
+              "DataType": "character varying(20)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "city",
+              "DataType": "character varying(50)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "country",
+              "DataType": "character varying(50)",
+              "Description": null,
+              "IsNullable": true
+            },
+            {
+              "Name": "sid",
+              "DataType": "smallint",
+              "Description": null,
+              "IsNullable": true
+            }
+          ],
+          "Source": " SELECT s.staff_id AS id,\n    concat((s.first_name)::text, ' '::text, (s.last_name)::text) AS name,\n    a.address,\n    a.postal_code AS \"zip code\",\n    a.phone,\n    city.city,\n    country.country,\n    s.store_id AS sid\n   FROM (((sakila.staff s\n     JOIN sakila.address a ON ((s.address_id = a.address_id)))\n     JOIN sakila.city ON ((a.city_id = city.city_id)))\n     JOIN sakila.country ON ((city.country_id = country.country_id)));"
+        }
+      ]
+    }
+  ]
+}

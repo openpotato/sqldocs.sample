@@ -1,0 +1,63 @@
+pool:
+  vmImage: 'windows-2022'
+    
+variables:
+- group: 'github-config'
+    
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+    architecture: 'x64'
+- task: PowerShell@2
+  displayName: 'Git configuration'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  inputs:
+    targetType: 'inline'
+    script: |
+      git config user.name ci-bot
+      git config user.email ci-bot@stueber.de
+    pwsh: true
+- task: PowerShell@2
+  displayName: Install MkDocs + Mike
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  inputs:
+    targetType: 'inline'
+    script: |
+      pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin mkdocs-minify-plugin mike --disable-pip-version-check
+    failOnStderr: true
+    pwsh: true
+    workingDirectory: '$(Build.SourcesDirectory)'
+- task: PowerShell@2
+  displayName: Build Sakila:Firebird
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  inputs:
+    targetType: 'inline'
+    script: |
+      mike deploy firebird
+    pwsh: true
+    workingDirectory: '$(Build.SourcesDirectory)/firebird'
+- task: PowerShell@2
+  displayName: Build Sakila:PostgreSQL
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  inputs:
+    targetType: 'inline'
+    script: |
+      mike deploy postgres
+    pwsh: true
+    workingDirectory: '$(Build.SourcesDirectory)/postgres'
+- task: PowerShell@2
+  displayName: 'Push to GitHub'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  inputs:
+    targetType: 'inline'
+    script: |
+      git remote add github https://$(PAT)@github.com/openpotato/sqldocs.sample.git
+      git fetch github
+      git checkout .
+      git push github HEAD:main
+      git push --tags github HEAD:main
+      git checkout gh-pages
+      git push github HEAD:gh-pages -f
+    pwsh: true

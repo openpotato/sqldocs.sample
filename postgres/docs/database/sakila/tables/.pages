@@ -1,0 +1,17 @@
+nav:
+   - actor: actor.md
+   - address: address.md
+   - category: category.md
+   - city: city.md
+   - country: country.md
+   - customer: customer.md
+   - film: film.md
+   - film_actor: film_actor.md
+   - film_category: film_category.md
+   - film_text: film_text.md
+   - inventory: inventory.md
+   - language: language.md
+   - payment: payment.md
+   - rental: rental.md
+   - staff: staff.md
+   - store: store.md

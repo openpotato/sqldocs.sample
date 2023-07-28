@@ -1,0 +1,8 @@
+nav:
+   - ACTOR_INFO: actor_info.md
+   - CUSTOMER_LIST: customer_list.md
+   - FILM_LIST: film_list.md
+   - NICER_BUT_SLOWER_FILM_LIST: nicer_but_slower_film_list.md
+   - SALES_BY_FILM_CATEGORY: sales_by_film_category.md
+   - SALES_BY_STORE: sales_by_store.md
+   - STAFF_LIST: staff_list.md
