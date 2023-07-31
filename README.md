@@ -5,9 +5,7 @@ This repository includes the souce code for the following sample database docume
 + [Sample documentation for Firebird](https://openpotato.github.io/sqldocs.sample/firebird)
 + [Sample documentation for PostgreSQL](https://openpotato.github.io/sqldocs.sample/postgres)
 
-## Getting started
-
-More information is available in the [GitHub wiki](https://github.com/openpotato/sqldocs.sample/wiki).
+To connect both documentations, we use [Mike](https://github.com/jimporter/mike), a Python utility that makes it easy to deploy multiple versions of a MkDocs-powered docs to a Git branch. 
 
 ## Can I help?
 
