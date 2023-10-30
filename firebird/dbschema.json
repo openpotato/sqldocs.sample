@@ -1,6 +1,6 @@
 {
   "Name": "Sakila Sample Firebird Schema",
-  "Version": "10",
+  "Version": "1.5",
   "Description": "Sakila Sample Database Schema for Firebird",
   "DbmsName": "Firebird",
   "DbmsVersion": "4.0",

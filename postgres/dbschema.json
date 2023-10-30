@@ -1,6 +1,6 @@
 {
   "Name": "Sakila Sample PostgreSQL Schema",
-  "Version": "10",
+  "Version": "1.5",
   "Description": "Sakila Sample Database Schema for PostgreSQL",
   "DbmsName": "PostgreSQL",
   "DbmsVersion": "14.4",
