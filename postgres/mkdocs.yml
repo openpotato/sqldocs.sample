@@ -3,7 +3,7 @@ site_author: STÜBER SYSTEMS GmbH
 site_description: Documentation of the Sakila Sample Database Schema for PostgreSQL
 
 copyright:
-  '&copy; 2023 STÜBER SYSTEMS GmbH : <a href="https://legal.stueber.co.uk/imprint.php">Imprint</a> : <a href="https://legal.stueber.co.uk/privacy.php">Privacy</a>'
+  '&copy; 2025 STÜBER SYSTEMS GmbH : <a href="https://legal.stueber.de/en/imprint.php">Imprint</a> : <a href="https://legal.stueber.de/en/privacy.php">Privacy</a>'
 
 theme:
   name: material
