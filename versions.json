@@ -1,1 +1,12 @@
-[{"version": "postgres", "title": "PostgreSQL", "aliases": []}, {"version": "firebird", "title": "Firebird", "aliases": []}]
+[
+  {
+    "version": "postgres",
+    "title": "PostgreSQL",
+    "aliases": []
+  },
+  {
+    "version": "firebird",
+    "title": "Firebird",
+    "aliases": []
+  }
+]
